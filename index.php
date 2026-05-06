@@ -36,17 +36,17 @@ background-color: #f2f2f2;
 
 <h2>commande ESP32</h2>
 
-   <button onclick="fetch('http://192.168.100.124/sonon')">
+   <button onclick="fetch('*********/sonon')">
    Allumer son
    </button>
-      <button onclick="fetch('http://192.168.100.124/sonoff')">
+      <button onclick="fetch('http://*********/sonoff')">
    Eteindre son
    </button>
 <h3></h3>
-  <button onclick="fetch('http://192.168.100.124/ledon')">
+  <button onclick="fetch('http://**********/ledon')">
    Allumer led
    </button>
-   	<button onclick="fetch('http://192.168.100.124/ledoff')">
+   	<button onclick="fetch('http://**********/ledoff')">
   Eteindre led
    </button>
 </body>
