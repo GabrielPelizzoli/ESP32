@@ -23,3 +23,30 @@ Il peut être consulté depuis un navigateur
 
 En résumé :
 index.php sert à afficher les données stockées dans la base de données.
+
+Code Arduino / ESP32
+arduino
+
+Ce fichier contient le code principal utilisé avec l’ESP32 via l’environnement Arduino.
+
+Il initialise la connexion WiFi de l’ESP32
+Il lit les données des capteurs
+Il prépare les données à envoyer vers le serveur
+Il envoie une requête HTTP vers data.php
+
+En résumé :
+Ce code permet à l’ESP32 de collecter et envoyer des données vers le serveur web.
+
+L’ESP32 est un microcontrôleur très utilisé en IoT car il intègre le WiFi et peut envoyer des données directement via HTTP ou API .
+
+arduino pour ESP32
+
+Ce fichier est une version adaptée ou spécifique du code pour ESP32.
+
+Il utilise les bibliothèques compatibles ESP32 (WiFi, HTTPClient, etc.)
+Il gère la connexion réseau et les requêtes HTTP (GET/POST)
+Il peut inclure des optimisations spécifiques au matériel ESP32
+Il assure la communication avec le serveur (data.php)
+
+En résumé :
+Ce fichier est la version optimisée pour ESP32, compatible avec l’IDE Arduino et ses bibliothèques.
