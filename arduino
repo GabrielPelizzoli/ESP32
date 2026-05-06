@@ -1,0 +1,46 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+const char* ssid = "*******";
+const char* password = "********";
+const char* serverName = "http://********/*****/******";
+
+void setup() {
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print("."); 
+  }
+}
+
+void loop() {
+  if (WiFi.status() == WL_CONNECTED) {
+    int valeur = random(0,100);
+
+    HTTPClient http;
+    http.begin(serverName);
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    String donnee = "valeur=" + String(valeur);
+    Serial.print("donnee transmise ");
+    Serial.println(donnee);
+    int httpReponse = http.POST(donnee);
+    Serial.print("HTTP Reponse code: ");
+    Serial.println(httpReponse);
+     if (httpReponse > 0) {
+      String payload = http.getString();
+      Serial.print("Réponse serveur: ");
+      Serial.println(payload);
+      } else {
+        Serial.print("Erreur lors de la requête POST: ");
+        Serial.println(http.errorToString(httpReponse).c_str());
+      }
+
+
+    http.end();
+  }
+
+  delay(5000);
+}
