@@ -1,0 +1,67 @@
+#include <WiFi.h>
+#include <WebServer.h>
+
+const char* ssid = "*******";    // à modifier
+const char* password = "******"; // à modifier aussi
+
+WebServer server(80);
+
+int sortieled = 23;
+int buzzer = 22;
+int frequence = 2000;
+
+void ledON() {
+  digitalWrite(sortieled, HIGH);
+  server.send(200, "text/plain", "LED ON");
+}
+
+void ledOFF() {
+  digitalWrite(sortieled, LOW);
+  server.send(200, "text/plain", "LED OFF");
+}
+
+void sonON() {
+  ledcWriteTone(buzzer , 1000);
+  delay(500);
+  ledcWriteTone(buzzer, 500); 
+  delay(500);
+  ledcWriteTone(buzzer, 1000); 
+  delay(500);
+  ledcWriteTone(buzzer, 500); 
+  delay(500);
+ Serial.println("on");
+  
+  server.send(200, "text/plain", "Son test");
+}
+
+void sonOFF() {
+  ledcWriteTone(buzzer , 0);
+  Serial.println("off");
+  server.send(200, "text/plain", "Son off");
+}
+void setup() {
+
+  Serial.begin(115200);
+
+  pinMode(sortieled, OUTPUT);
+  ledcAttach(buzzer, frequence,8);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+
+  Serial.println(WiFi.localIP());
+
+  server.on("/ledon", ledON);
+  server.on("/ledoff", ledOFF);
+  server.on("/sonon", sonON);
+  server.on("/sonoff", sonOFF);
+  
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+  
+}
